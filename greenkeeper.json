@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "1.구구단/package.json",
+        "2.끝말잇기/package.json",
+        "3.숫자야구/package.json",
+        "4.반응속도체크/package.json"
+      ]
+    }
+  }
+}
