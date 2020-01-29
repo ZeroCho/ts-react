@@ -1,0 +1,25 @@
+{
+  "name": "minesearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --hot"
+  },
+  "author": "ZeroCho",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "react-hot-loader": "^4.8.3",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  }
+}
