@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  name: 'react-router',
+  name: 'react-redux-immer',
   mode: 'development',
   devtool: 'eval',
   resolve: {

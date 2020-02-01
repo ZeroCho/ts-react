@@ -1,10 +1,13 @@
 import * as React from 'react';
+import { useContext, memo } from 'react';
 import Td from './Td';
 import { TableContext } from './MineSearch';
 
-const { useContext, memo } = React;
+interface Props {
+  rowIndex: number;
+}
 
-const Tr = ({ rowIndex }) => {
+const Tr: React.FunctionComponent<Props> = ({ rowIndex }) => {
   const { tableData } = useContext(TableContext);
 
   return (

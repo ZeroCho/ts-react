@@ -1,7 +1,6 @@
 import * as React from 'react';
+import { useContext, useCallback, memo } from 'react';
 import { CLICK_MINE, CODE, FLAG_CELL, NORMALIZE_CELL, OPEN_CELL, QUESTION_CELL, TableContext } from './MineSearch';
-
-const { useContext, useCallback, memo } = React;
 
 const getTdStyle = (code: number) => {
   switch (code) {
@@ -52,7 +51,12 @@ const getTdText = (code: number) => {
   }
 };
 
-const Td = ({ rowIndex, cellIndex }) => {
+interface Props {
+  rowIndex: number;
+  cellIndex: number;
+}
+
+const Td: React.FunctionComponent<Props> = ({ rowIndex, cellIndex }) => {
   const { tableData, dispatch, halted } = useContext(TableContext);
 
   const onClickTd = useCallback(() => {
@@ -77,7 +81,7 @@ const Td = ({ rowIndex, cellIndex }) => {
     }
   }, [tableData[rowIndex][cellIndex], halted]);
 
-  const onRightClickTd = useCallback((e) => {
+  const onRightClickTd = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     if (halted) {
       return;
@@ -105,7 +109,13 @@ const Td = ({ rowIndex, cellIndex }) => {
   return <RealTd onClickTd={onClickTd} onRightClickTd={onRightClickTd} data={tableData[rowIndex][cellIndex]} />;
 };
 
-const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
+interface IRealTd {
+  onClickTd: () => void;
+  onRightClickTd: (e: React.MouseEvent) => void;
+  data: number;
+}
+
+const RealTd = memo<IRealTd>(({ onClickTd, onRightClickTd, data}) => {
   console.log('real td rendered');
   return (
     <td

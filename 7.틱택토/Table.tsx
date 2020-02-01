@@ -7,6 +7,7 @@ const { useMemo } = React;
 interface Props {
   tableData: string[][];
   dispatch: Dispatch<any>
+  onClick: () => void;
 }
 const Table: FunctionComponent<Props> = ({ tableData, dispatch }) => {
   return (

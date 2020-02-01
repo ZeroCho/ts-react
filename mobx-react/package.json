@@ -1,0 +1,27 @@
+{
+  "name": "5.mobx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --hot"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "mobx": "^5.14.2",
+    "mobx-react": "^6.1.4",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "react-hot-loader": "^4.12.15",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}

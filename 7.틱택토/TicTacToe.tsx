@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { useEffect, useReducer, useCallback, Reducer } from 'react';
 import Table from './Table';
 
-const { useEffect, useReducer, useCallback } = React;
-
 interface ReducerState {
-  winner: string,
+  winner: 'O' | 'X' | '',
   turn: 'O' | 'X',
   tableData: string[][],
   recentCell: [number, number],
@@ -26,7 +25,35 @@ export const CLICK_CELL = 'CLICK_CELL' as const;
 export const CHANGE_TURN = 'CHANGE_TURN' as const;
 export const RESET_GAME = 'RESET_GAME' as const;
 
-const reducer = (state: ReducerState, action) => {
+interface SetWinnerAction {
+  type: typeof SET_WINNER;
+  winner: 'O' | 'X';
+}
+
+const setWinner = (winner: 'O' | 'X'): SetWinnerAction => {
+  return { type: SET_WINNER, winner };
+};
+
+interface ClickCellAction {
+  type: typeof CLICK_CELL;
+  row: number;
+  cell: number;
+}
+
+const clickCell = (row: number, cell: number): ClickCellAction => {
+  return { type: CLICK_CELL, row, cell };
+};
+
+interface ChangeTurnAction {
+  type: typeof CHANGE_TURN;
+}
+
+interface ResetGameAction {
+  type: typeof RESET_GAME;
+}
+
+type ReducerActions = SetWinnerAction | ClickCellAction | ChangeTurnAction | ResetGameAction;
+const reducer = (state: ReducerState, action: ReducerActions): ReducerState => {
   switch (action.type) {
     case SET_WINNER:
       // state.winner = action.winner; 이렇게 하면 안됨.
@@ -68,14 +95,14 @@ const reducer = (state: ReducerState, action) => {
 };
 
 const TicTacToe = () => {
-  const [state, dispatch] = useReducer<(state: ReducerState, action: ReducerState) => any>(reducer, initialState);
+  const [state, dispatch] = useReducer<Reducer<ReducerState, ReducerActions>>(reducer, initialState);
   const { tableData, turn, winner, recentCell } = state;
   // const [winner, setWinner] = useState('');
   // const [turn, setTurn] = useState('O');
   // const [tableData, setTableData] = useState([['', '', ''], ['', '', ''], ['', '', '']]);
 
   const onClickTable = useCallback(() => {
-    dispatch({ type: SET_WINNER, winner: 'O' });
+    dispatch(setWinner('O'));
   }, []);
 
   useEffect(() => {

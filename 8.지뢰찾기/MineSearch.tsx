@@ -1,8 +1,7 @@
 import * as React from 'react';
+import { useEffect, useReducer, createContext, useMemo, Dispatch } from 'react';
 import Table from './Table';
 import Form from './Form';
-
-const { createContext } = React;
 
 export const CODE = {
   MINE: -7,
@@ -15,13 +14,32 @@ export const CODE = {
   OPENED: 0, // 0 이상이면 다 opened
 };
 
-export const TableContext = createContext({
+interface Context {
+  tableData: number[][],
+  halted: boolean,
+  dispatch: Dispatch<ReducerActions>
+}
+
+export const TableContext = createContext<Context>({
   tableData: [],
   halted: true,
   dispatch: () => {},
 });
 
-const initialState = {
+interface ReducerState {
+  tableData: number[][],
+  data: {
+    row: number,
+    cell: number,
+    mine: number,
+  },
+  timer: number,
+  result: string,
+  halted: boolean,
+  openedCount: number,
+}
+
+const initialState: ReducerState = {
   tableData: [],
   data: {
     row: 0,
@@ -71,7 +89,91 @@ export const QUESTION_CELL = 'QUESTION_CELL';
 export const NORMALIZE_CELL = 'NORMALIZE_CELL';
 export const INCREMENT_TIMER = 'INCREMENT_TIMER';
 
-const reducer = (state, action) => {
+interface StartGameAction {
+  type: typeof START_GAME,
+  row: number,
+  cell: number,
+  mine: number,
+}
+
+const startGame = (row: number, cell: number, mine: number): StartGameAction => {
+  return {
+    type: START_GAME, row, cell, mine,
+  };
+};
+
+interface OpenCellAction {
+  type: typeof OPEN_CELL,
+  row: number,
+  cell: number,
+}
+
+const openCell = (row: number, cell: number): OpenCellAction => {
+  return {
+    type: OPEN_CELL, row, cell,
+  };
+};
+
+interface ClickMineAction {
+  type: typeof CLICK_MINE,
+  row: number,
+  cell: number,
+}
+
+const clickMine = (row: number, cell: number): ClickMineAction => {
+  return {
+    type: CLICK_MINE, row, cell,
+  };
+};
+
+interface FlagMineAction {
+  type: typeof FLAG_CELL,
+  row: number,
+  cell: number,
+}
+
+const flagMine = (row: number, cell: number): FlagMineAction => {
+  return {
+    type: FLAG_CELL, row, cell,
+  };
+};
+
+interface QuestionCellAction {
+  type: typeof QUESTION_CELL,
+  row: number,
+  cell: number,
+}
+
+const questionCell = (row: number, cell: number): QuestionCellAction => {
+  return {
+    type: QUESTION_CELL, row, cell,
+  };
+};
+
+interface NormalizeCellAction {
+  type: typeof NORMALIZE_CELL,
+  row: number,
+  cell: number,
+}
+
+const normalizeCell = (row: number, cell: number): NormalizeCellAction => {
+  return {
+    type: NORMALIZE_CELL, row, cell,
+  };
+};
+
+interface IncrementTimerAction {
+  type: typeof INCREMENT_TIMER,
+}
+
+const incrementTimer = (): IncrementTimerAction => {
+  return {
+    type: INCREMENT_TIMER,
+  };
+};
+
+type ReducerActions = StartGameAction | OpenCellAction | ClickMineAction | FlagMineAction | QuestionCellAction | NormalizeCellAction | IncrementTimerAction;
+const reducer = (state = initialState, action: ReducerActions): ReducerState => {
   switch (action.type) {
     case START_GAME:
       return {
@@ -91,10 +193,10 @@ const reducer = (state, action) => {
       tableData.forEach((row, i) => {
         tableData[i] = [...row];
       });
-      const checked = [];
+      const checked: string[] = [];
       let openedCount = 0;
       console.log(tableData.length, tableData[0].length);
-      const checkAround = (row, cell) => {
+      const checkAround = (row: number, cell: number) => {
         console.log(row, cell);
         if (row < 0 || row >= tableData.length || cell < 0 || cell >= tableData[0].length) {
           return;
@@ -223,6 +325,22 @@ const reducer = (state, action) => {
 };
 
 const MineSearch = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { tableData, halted, timer, result } = state;
+
+  const value = useMemo(() => ({ tableData, halted, dispatch }), [tableData, halted]);
+
+  useEffect(() => {
+    let timer: number;
+    if (halted === false) {
+      timer = setInterval(() => {
+        dispatch({ type: INCREMENT_TIMER });
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timer);
+    }
+  }, [halted]);
   return (
     <TableContext.Provider value={value}>
       <Form />

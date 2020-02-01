@@ -1,8 +1,9 @@
-import React from 'react';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import GameMatcher from './GameMatcher';
 
-const Games = () => {
+const Games: React.FunctionComponent = () => {
   return (
     <BrowserRouter>
       <div>
