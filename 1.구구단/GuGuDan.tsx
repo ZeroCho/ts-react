@@ -1,12 +1,12 @@
 import * as React from 'react';
-const { useState, useRef } = React;
+import { useState, useRef } from 'react';
 
 const GuGuDan = () => {
   const [first, setFirst] = useState(Math.ceil(Math.random() * 9));
   const [second, setSecond] = useState(Math.ceil(Math.random() * 9));
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
-  const inputEl = useRef<HTMLInputElement | null>(null);
+  const inputEl = useRef<HTMLInputElement>(null);
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();

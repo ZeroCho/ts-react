@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import GameMatcher from './GameMatcher';
 

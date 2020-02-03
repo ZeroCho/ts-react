@@ -1,5 +1,5 @@
 import * as React from 'react';
-const { Component } = React;
+import { Component } from 'react';
 
 class WordRelay extends Component {
   state = {

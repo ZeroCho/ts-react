@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "lib": [
+            "es5",
+            "es2015",
+            "dom"
+        ],
+        "jsx": "react",
+    },
+    "exclude": ["node_modules"]
+}
