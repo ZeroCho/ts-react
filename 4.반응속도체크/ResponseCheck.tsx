@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-const { useState, useRef } = React;
+import { useState, useRef } from 'react';
 
 const ResponseCheck = () => {
   const [state, setState] = useState('waiting');

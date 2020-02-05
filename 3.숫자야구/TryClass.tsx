@@ -1,7 +1,6 @@
 import * as React from 'react';
+import { Component } from 'react';
 import { TryProps } from './types';
-
-const { Component } = React;
 
 class Try extends Component<TryProps> {
   render() {

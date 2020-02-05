@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader/root';
 
-import WordRelay from './WordRelay';
+import ResponseCheck from './ResponseCheck';
 
-const Hot = hot(WordRelay); // HOC
+const Hot = hot(ResponseCheck); // HOC
 
 ReactDOM.render(<Hot />, document.querySelector('#root'));

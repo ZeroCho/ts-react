@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-const { Component, createRef } = React;
+import { Component, createRef } from 'react';
 
 interface State {
   state: 'waiting' | 'now' | 'ready',

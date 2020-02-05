@@ -17,11 +17,10 @@ module.exports = {
             loader: 'awesome-typescript-loader',
         }]
     },
-    plugins: [
-        new webpack.LoaderOptionsPlugin({ debug: true }),
-    ],
+    plugins: [],
     output: {
         filename: 'app.js',
         path: path.join(__dirname, 'dist'),
+        publicPath: '/dist',
     }
 }

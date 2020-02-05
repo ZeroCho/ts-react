@@ -1,7 +1,25 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>끝말잇기</title>
+        <title>반응속도체크</title>
+        <style>
+            #screen {
+                width: 300px;
+                height: 200px;
+                text-align: center;
+                user-select: none;
+            }
+            #screen.waiting {
+                background-color: aqua;
+            }
+            #screen.ready {
+                background-color: red;
+                color: white;
+            }
+            #screen.now {
+                background-color: greenyellow;
+            }
+        </style>
     </head>
     <body>
         <div id="root"></div>
