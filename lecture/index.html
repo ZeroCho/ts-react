@@ -1,28 +1,23 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>반응속도체크</title>
-        <style>
-            #screen {
-                width: 300px;
-                height: 200px;
-                text-align: center;
-                user-select: none;
-            }
-            #screen.waiting {
-                background-color: aqua;
-            }
-            #screen.ready {
-                background-color: red;
-                color: white;
-            }
-            #screen.now {
-                background-color: greenyellow;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script src="./dist/app.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>지뢰찾기</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid black;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="./dist/app.js"></script>
+</body>
+
 </html>

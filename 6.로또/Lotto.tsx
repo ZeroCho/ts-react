@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Ball from './Ball';
-
-const { useState, useRef, useEffect, useMemo, useCallback } = React;
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 
 function getWinNumbers() {
   console.log('getWinNumbers');

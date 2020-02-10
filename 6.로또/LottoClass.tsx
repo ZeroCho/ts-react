@@ -1,7 +1,6 @@
 import * as React from 'react';
+import { Component } from 'react';
 import Ball from './Ball';
-
-const { Component } = React;
 
 function getWinNumbers() {
   console.log('getWinNumbers');

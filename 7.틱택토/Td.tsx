@@ -1,8 +1,6 @@
-import { Dispatch, FunctionComponent } from 'react';
 import * as React from 'react';
+import { useCallback, useEffect, useRef, memo, Dispatch, FunctionComponent } from 'react';
 import { CLICK_CELL } from './TicTacToe';
-
-const { useCallback, useEffect, useRef, memo } = React;
 
 interface Props {
   rowIndex: number;

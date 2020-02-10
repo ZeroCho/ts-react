@@ -1,8 +1,6 @@
-import { Dispatch, FunctionComponent } from 'react';
 import * as React from 'react';
+import { Dispatch, FunctionComponent, useMemo } from 'react';
 import Tr from './Tr';
-
-const { useMemo } = React;
 
 interface Props {
   tableData: string[][];

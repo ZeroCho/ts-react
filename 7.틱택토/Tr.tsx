@@ -1,8 +1,6 @@
-import { Dispatch, FunctionComponent } from 'react';
+import { Dispatch, FunctionComponent, useRef, useEffect, memo, useMemo } from 'react';
 import * as React from 'react';
 import Td from './Td';
-
-const { useRef, useEffect, memo, useMemo } = React;
 
 interface Props {
   rowData: string[];
