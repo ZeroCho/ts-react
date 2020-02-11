@@ -16,7 +16,7 @@ const Games: React.FunctionComponent = () => {
       </div>
       <div>
         <Switch>
-          <Route exact path="/" render={(props) => <GameMatcher {...props} />} />
+          <Route exact path="/" component={GameMatcher} />
           <Route path="/game/:name" render={(props) => <GameMatcher {...props} />} />
         </Switch>
       </div>
