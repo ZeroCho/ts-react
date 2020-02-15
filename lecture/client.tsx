@@ -1,9 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader/root';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './App';
 
-import Games from './Games';
+const Hot = hot(App); // HOC
 
-const Hot = hot(Games); // HOC
-
-ReactDOM.render(<Hot />, document.querySelector('#root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <Hot />
+    </Provider>,
+    document.querySelector('#root')
+);

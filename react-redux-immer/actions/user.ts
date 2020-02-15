@@ -28,7 +28,7 @@ export interface LogOutAction {
   type: typeof LOG_OUT,
 }
 
-interface ThunkDispatch {
+export interface ThunkDispatch {
   (thunkAction: ThunkAction): void;
   <A>(action: A): A;
   // This overload is the union of the two above (see TS issue #14107).
