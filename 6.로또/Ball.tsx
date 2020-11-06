@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { memo } from 'react';
 
-const Ball = ({ number }: { number: number }) => {
+const Ball = memo(({ number }: { number: number }) => {
   let background;
   if (number <= 10) {
     background = 'red';
@@ -17,6 +17,6 @@ const Ball = ({ number }: { number: number }) => {
   return (
     <div className="ball" style={{ background }}>{number}</div>
   )
-};
+});
 
 export default React.memo(Ball);

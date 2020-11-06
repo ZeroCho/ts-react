@@ -35,7 +35,7 @@ class Lotto extends Component<{}, State> {
     console.log('runTimeouts');
     const { winNumbers } = this.state;
     for (let i = 0; i < winNumbers.length - 1; i++) {
-      this.timeouts[i] = setTimeout(() => {
+      this.timeouts[i] = window.setTimeout(() => {
         this.setState((prevState) => {
           return {
             winBalls: [...prevState.winBalls, winNumbers[i]],
@@ -43,7 +43,7 @@ class Lotto extends Component<{}, State> {
         });
       }, (i + 1) * 1000);
     }
-    this.timeouts[6] = setTimeout(() => {
+    this.timeouts[6] = window.setTimeout(() => {
       this.setState({
         bonus: winNumbers[6],
         redo: true,

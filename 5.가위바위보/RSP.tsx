@@ -25,6 +25,7 @@ const RSP = () => {
     const [imgCoord, setImgCoord] = useState<ImgCoords>(rspCoords.바위);
     const [score, setScore] = useState(0);
     const interval = useRef<number>();
+    const clicked = useRef<boolean>(false);
 
     useEffect(() => { // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
         console.log('다시 실행');
@@ -46,22 +47,26 @@ const RSP = () => {
     };
 
     const onClickBtn = (choice: keyof typeof rspCoords) => () => {
-        clearInterval(interval.current);
-        const myScore = scores[choice];
-        const cpuScore = scores[computerChoice(imgCoord)];
-        const diff = myScore - cpuScore;
-        if (diff === 0) {
-            setResult('비겼습니다!');
-        } else if ([-1, 2].includes(diff)) {
-            setResult('이겼습니다!');
-            setScore((prevScore) => prevScore + 1);
-        } else {
-            setResult('졌습니다!');
-            setScore((prevScore) => prevScore - 1);
+        if (!clicked.current) {
+            clearInterval(interval.current);
+            clicked.current = true;
+            const myScore = scores[choice];
+            const cpuScore = scores[computerChoice(imgCoord)];
+            const diff = myScore - cpuScore;
+            if (diff === 0) {
+                setResult('비겼습니다!');
+            } else if ([-1, 2].includes(diff)) {
+                setResult('이겼습니다!');
+                setScore((prevScore) => prevScore + 1);
+            } else {
+                setResult('졌습니다!');
+                setScore((prevScore) => prevScore - 1);
+            }
+            setTimeout(() => {
+                interval.current = window.setInterval(changeHand, 100);
+                clicked.current = false;
+            }, 1000);
         }
-        setTimeout(() => {
-            interval.current = window.setInterval(changeHand, 100);
-        }, 1000);
     }
 
     return (

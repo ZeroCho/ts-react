@@ -11,7 +11,7 @@ const ResponseCheck = () => {
 
   const onClickScreen = () => {
     if (state === 'waiting') {
-      timeout.current = setTimeout(() => {
+      timeout.current = window.setTimeout(() => {
         setState('now');
         setMessage('지금 클릭');
         startTime.current = new Date().getTime();

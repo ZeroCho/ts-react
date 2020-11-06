@@ -25,11 +25,11 @@ const Lotto = () => {
   useEffect(() => {
     console.log('useEffect');
     for (let i = 0; i < winNumbers.length - 1; i++) {
-      timeouts.current[i] = setTimeout(() => {
+      timeouts.current[i] = window.setTimeout(() => {
         setWinBalls((prevBalls) => [...prevBalls, winNumbers[i]]);
       }, (i + 1) * 1000);
     }
-    timeouts.current[6] = setTimeout(() => {
+    timeouts.current[6] = window.setTimeout(() => {
       setBonus(winNumbers[6]);
       setRedo(true);
     }, 7000);

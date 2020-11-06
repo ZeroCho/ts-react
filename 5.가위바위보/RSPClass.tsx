@@ -33,9 +33,10 @@ class RSP extends Component<{}, State> {
     }
 
     interval: number | null = null;
+    clicked: boolean = false;
 
     componentDidMount() { // 컴포넌트가 첫 렌더링된 후, 여기에 비동기 요청을 많이 해요
-        this.interval = setInterval(this.changeHand, 100);
+        this.interval = window.setInterval(this.changeHand, 100);
     }
 
     componentWillUnmount() { // 컴포넌트가 제거되기 직전, 비동기 요청 정리를 많이 해요
@@ -60,33 +61,37 @@ class RSP extends Component<{}, State> {
     };
 
     onClickBtn = (choice: keyof typeof rspCoords) => () => {
-        const { imgCoords } = this.state;
-        clearInterval(this.interval!);
-        const myScore = scores[choice];
-        const cpuScore = scores[computerChoice(imgCoords)!];
-        const diff = myScore - cpuScore;
-        if (diff === 0) {
-            this.setState({
-                result: '비겼습니다!',
-            });
-        } else if ([-1, 2].includes(diff)) {
-            this.setState((prevState) => {
-                return {
-                    result: '이겼습니다!',
-                    score: prevState.score + 1,
-                };
-            });
-        } else {
-            this.setState((prevState) => {
-                return {
-                    result: '졌습니다!',
-                    score: prevState.score - 1,
-                };
-            });
+        if (!this.clicked) {
+            const { imgCoords } = this.state;
+            clearInterval(this.interval!);
+            this.clicked = true;
+            const myScore = scores[choice];
+            const cpuScore = scores[computerChoice(imgCoords)!];
+            const diff = myScore - cpuScore;
+            if (diff === 0) {
+                this.setState({
+                    result: '비겼습니다!',
+                });
+            } else if ([-1, 2].includes(diff)) {
+                this.setState((prevState) => {
+                    return {
+                        result: '이겼습니다!',
+                        score: prevState.score + 1,
+                    };
+                });
+            } else {
+                this.setState((prevState) => {
+                    return {
+                        result: '졌습니다!',
+                        score: prevState.score - 1,
+                    };
+                });
+            }
+            window.setTimeout(() => {
+                this.interval = window.setInterval(this.changeHand, 100);
+                this.clicked = false;
+            }, 1000);
         }
-        setTimeout(() => {
-            this.interval = window.setInterval(this.changeHand, 100);
-        }, 1000);
     };
 
     render() {

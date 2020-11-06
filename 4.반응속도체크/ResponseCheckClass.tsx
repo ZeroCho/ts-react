@@ -21,7 +21,7 @@ class ResponseCheck extends Component<{}, State> {
   onClickScreen = () => {
     const { state } = this.state;
     if (state === 'waiting') {
-      this.timeout = setTimeout(() => {
+      this.timeout = window.setTimeout(() => {
         this.setState({
           state: 'now',
           message: '지금 클릭',

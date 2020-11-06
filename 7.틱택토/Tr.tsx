@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, useRef, useEffect, memo, useMemo } from 'react';
+import { Dispatch, FunctionComponent, memo, useMemo } from 'react';
 import * as React from 'react';
 import Td from './Td';
 
@@ -10,12 +10,6 @@ interface Props {
 
 const Tr: FunctionComponent<Props> = ({ rowData, rowIndex, dispatch }) => {
   console.log('tr rendered');
-
-  const ref = useRef<[string[]?, Dispatch<any>?, number?]>([]);
-  useEffect(() => {
-    console.log(rowData === ref.current[0], dispatch === ref.current[1], rowIndex === ref.current[2]);
-    ref.current = [rowData, dispatch, rowIndex];
-  }, [rowData, dispatch, rowIndex]);
 
   return (
     <tr>
