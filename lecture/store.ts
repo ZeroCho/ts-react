@@ -1,34 +1,42 @@
-import { createStore, MiddlewareAPI, Dispatch, AnyAction, applyMiddleware, compose } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { observable, action } from 'mobx';
 
-import reducer from './reducers';
-
-const initialState = {
-    user: {
-        isLoggingIn: false,
-        data: null,
-    },
-    posts: [],
+export interface User {
+    nickname: string;
+    password: string;
 }
 
-const firstMiddleware = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
-    console.log('로깅', action);
-    next(action);
+interface UserStore {
+    isLoggingIn: boolean,
+    data: User | null,
+    logIn: (data: User) => void;
+    logOut: () => void;
+}
+const userStore = observable<UserStore>({
+    isLoggingIn: false,
+    data: null,
+    logIn: action((data: User) => {
+        userStore.isLoggingIn = true;
+        setTimeout(action(() => {
+            userStore.data = data;
+            userStore.isLoggingIn = false;
+            postStore.addPost('hello');
+        }), 2000);
+    }),
+    logOut: action(() => {
+        userStore.data = null;
+    }),
+});
+
+interface PostStore {
+    data: string[];
+    addPost: (data: string) => void;
 }
 
-const thunkMiddleware = (store: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: any) => {
-    if (typeof action === 'function') { // 비동기
-        return action(store.dispatch, store.getState);
-    }
-    return next(action); // 동기
-};
+const postStore = observable<PostStore>({
+    data: [],
+    addPost: action((data: string) => {
+        postStore.data.push(data);
+    }),
+});
 
-const enhancer = process.env.NODE_ENV === 'production'
-    ? compose(applyMiddleware(firstMiddleware, thunkMiddleware))
-    : composeWithDevTools(
-        applyMiddleware(firstMiddleware, thunkMiddleware)
-    );
-
-const store = createStore(reducer, initialState, enhancer);
-
-export default store;
+export { userStore, postStore };

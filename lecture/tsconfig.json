@@ -8,5 +8,6 @@
             "dom"
         ],
         "jsx": "react",
+        "esModuleInterop": true,
     },
 }
