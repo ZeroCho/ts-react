@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import * as React from 'react';
 import NumberBaseball from '../3.숫자야구/NumberBaseballClass';
 import RSP from '../5.가위바위보/RSPClass';
 import Lotto from '../6.로또/LottoClass';
-import { useRouteMatch, useLocation, useHistory } from 'react-router';
+import { useRouteMatch, useLocation, useHistory, RouterProps } from 'react-router';
 
-const GameMatcher = () => {
+const GameMatcher: FC<RouterProps> = () => {
     const match = useRouteMatch<{ name: string }>();
     const location = useLocation();
     const history = useHistory();

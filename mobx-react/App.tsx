@@ -17,11 +17,11 @@ const App = () => {
   const state = useLocalStore<LocalStore>(() => ({
     name: '',
     password: '',
-    onChangeName: action(function(this: LocalStore, e: React.ChangeEvent<HTMLInputElement>) {
+    onChangeName: action(function onChangeName(this: LocalStore, e: React.ChangeEvent<HTMLInputElement>) {
       this.name = e.target.value;
       userStore.isLoggingIn = false;
     }),
-    onChangePassword: action(function(this: LocalStore, e: React.ChangeEvent<HTMLInputElement>) {
+    onChangePassword: action(function onChangePassword(this: LocalStore, e: React.ChangeEvent<HTMLInputElement>) {
       this.password = e.target.value;
     }),
   }));
