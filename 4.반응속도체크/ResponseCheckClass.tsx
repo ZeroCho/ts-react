@@ -44,7 +44,7 @@ class ResponseCheck extends Component<{}, State> {
         return {
           state: 'waiting',
           message: '클릭해서 시작하세요.',
-          result: [...prevState.result, this.endTime!, this.startTime!],
+          result: [...prevState.result, this.endTime! - this.startTime!],
         };
       });
     }
