@@ -1,36 +1,27 @@
-import { FC } from 'react';
 import * as React from 'react';
 import NumberBaseball from '../3.숫자야구/NumberBaseballClass';
 import RSP from '../5.가위바위보/RSPClass';
 import Lotto from '../6.로또/LottoClass';
-import { useRouteMatch, useLocation, useHistory, RouterProps } from 'react-router';
+import {useLocation, useNavigate, Routes, Route} from 'react-router';
 
-const GameMatcher: FC<RouterProps> = () => {
-    const match = useRouteMatch<{ name: string }>();
+const GameMatcher = () => {
     const location = useLocation();
-    const history = useHistory();
-    if (!match) {
-        return (
-            <div>
-                일치하는 게임이 없습니다.
-            </div>
-        );
-    }
+    const navigate = useNavigate();
     let urlSearchParams = new URLSearchParams(location.search.slice(1));
     console.log(urlSearchParams.get('page'));
-    if (match.params.name === 'number-baseball') {
-        return <NumberBaseball />
-    } else if (match.params.name === 'rock-scissors-paper') {
-        return <RSP />
-    } else if (match.params.name === 'lotto-generator') {
-        return <Lotto />
-    } else {
-        return (
-            <div>
-                일치하는 게임이 없습니다.
-            </div>
-        );
-    }
+    return (
+      <Routes>
+          <Route path="number-baseball" element={<NumberBaseball />} />
+          <Route path="rock-scissors-paper" element={<RSP />} />
+          <Route path="lotto-generator" element={<Lotto />} />
+          <Route
+            path="*"
+            element={<div>
+              일치하는 게임이 없습니다.
+            </div>}
+          />
+      </Routes>
+    );
 }
 
 export default GameMatcher;
