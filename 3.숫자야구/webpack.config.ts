@@ -33,8 +33,9 @@ const config: Configuration = {
     publicPath: '/dist',
   },
   devServer: {
-    publicPath: '/dist/',
-    hot: true,
+    devMiddleware: { publicPath: '/dist' },
+    static: { directory: path.resolve(__dirname) },
+    hot: true
   }
 };
 export default config;
