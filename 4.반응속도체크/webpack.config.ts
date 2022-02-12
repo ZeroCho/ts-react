@@ -1,7 +1,12 @@
 import path from 'path';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import { Configuration } from 'webpack';
+import { Configuration as WebpackConfiguration } from "webpack";
+import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration;
+}
 
 const config: Configuration = {
   name: 'response-check-dev',
@@ -33,8 +38,9 @@ const config: Configuration = {
     publicPath: '/dist/',
   },
   devServer: {
-    publicPath: '/dist/',
-    hot: true,
+    devMiddleware: { publicPath: '/dist' },
+    static: { directory: path.resolve(__dirname) },
+    hot: true
   }
 };
 export default config;
