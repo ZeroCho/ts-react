@@ -17,7 +17,7 @@ const Games: React.FunctionComponent = () => {
       <div>
         <Routes>
           <Route path="/" element={<GameMatcher />} />
-          <Route path="/game/:name" element={<GameMatcher />} />
+          <Route path="/game/*" element={<GameMatcher />} />
         </Routes>
       </div>
     </BrowserRouter>
